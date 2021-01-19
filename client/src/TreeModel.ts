@@ -11,7 +11,7 @@ export default class TreeModel {
         if (path) {
             const children = [];
             for (const node of this._data) {
-                if (node.path.includes(path) && node.path.length - path.length === 2) {
+                if (node.path.includes(path) && node.path.length - path.length !== 0) {
                     children.push(node)
                 }
             }

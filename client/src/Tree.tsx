@@ -2,7 +2,7 @@ import React, {useState} from "react"
 import TreeModel from "./TreeModel";
 import {TreeI, ModelNodeI} from "./interfaces";
 
-const TreeComponent = (props: { data : TreeI[]}) => {
+const Tree = (props: { data : TreeI[]}) => {
     const treeModel = new TreeModel(props.data);
     const firstLevelData = treeModel.getChildren(); // get first level nodes
 
@@ -23,7 +23,7 @@ const TreeComponent = (props: { data : TreeI[]}) => {
     )
 };
 
-export default TreeComponent;
+export default Tree;
 
 const Node = ({path, name, model}: ModelNodeI) => {
     const [isOpen, setOpen] = useState(false);

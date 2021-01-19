@@ -1,13 +1,8 @@
 import React from 'react';
-import { startMirage } from './server-mock';
 import withData from './withDataHOC';
-import TreeComponent from "./TreeComponent";
+import Tree from './Tree';
 
-if (process.env.NODE_ENV === 'development') {
-  startMirage();
-}
-
-const AppTree = withData(TreeComponent);
+const AppTree = withData(Tree);
 
 function App() {
   return <AppTree/>

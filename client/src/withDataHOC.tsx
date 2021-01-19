@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from "react";
 import {TreeI} from "./interfaces";
-import {load} from "./api";
+import {getTree} from "./api";
 
 const withData = (
     WrappedComponent: React.ComponentType<
@@ -15,7 +15,8 @@ const withData = (
         useEffect(() => {
             const fetchInitialState = async () => {
                 try {
-                    const data = await load();
+                    const {data} = await getTree();
+                    console.log('requestedData', data);
                     setInitialState(data);
                 } catch (e) {
                     setError(e);

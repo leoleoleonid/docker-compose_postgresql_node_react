@@ -3,9 +3,9 @@ const db = require('../db');
 
 module.exports = {
   async findOne(id) {
-    const {rows} = await db.query(sql`SELECT path FROM test WHERE id=${id} LIMIT 1;`);
+    const {rows} = await db.query(sql`SELECT * FROM test WHERE id=${id} LIMIT 1;`);
 
-    if (rows.length !== 1) {
+    if (!rows || rows.length !== 1) {
       return null;
     }
 
@@ -14,7 +14,16 @@ module.exports = {
   async find() {
     const {rows} = await db.query(sql`SELECT * FROM test;`);
 
-    if (!rows.length) {
+    if (!rows || !rows.length) {
+      return null;
+    }
+
+    return rows;
+  },
+  async findBranch(path) {
+    const {rows} = await db.query(`SELECT * FROM test WHERE path ~ '${path}*{1,1}';`);
+
+    if (!rows || !rows.length) {
       return null;
     }
 

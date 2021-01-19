@@ -82,7 +82,7 @@ getTree = async (req, res) => {
   try{
     const tree = await treeModel.find();
 
-    if (!tree.length) {
+    if (!tree) {
       return res
         .status(404)
         .json({ success: false, error: `tree not found` })
@@ -94,10 +94,33 @@ getTree = async (req, res) => {
   }
 }
 
+getTreeBranchByPath = async (req, res) => {
+  try{
+    let path = req.query.path;
+    if (!path ) {
+      path = '';
+    } else {
+      path = path + '.';
+    }
+
+    const branch = await treeModel.findBranch( path );
+    if (!branch) {
+      return res
+        .status(404)
+        .json({ success: false, error: `branch not found` })
+    }
+    return res.status(200).json({ success: true, data: branch })
+
+  } catch(err ) {
+    return res.status(400).json({ success: false, error: err })
+  }
+}
+
 module.exports = {
   createTree,
   updateTree,
   deleteTree,
   getTreeItemById,
   getTree,
+  getTreeBranchByPath
 }
