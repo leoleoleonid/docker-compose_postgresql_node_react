@@ -11,11 +11,12 @@ export default class TreeModel {
         if (path) {
             const children = [];
             for (const node of this._data) {
-                if (node.path.includes(path) && node.path.length - path.length !== 0) {
+                if (node.path.includes(path) && (node.path.split('.').length - path.split('.').length) === 1) {
+
                     children.push(node)
                 }
             }
-
+            console.log('children',children);
             return children;
         }
 
